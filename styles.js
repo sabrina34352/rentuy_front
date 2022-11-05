@@ -1,0 +1,88 @@
+import { StyleSheet } from 'react-native';
+export const mainStyle = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+  },
+  header: {
+    fontSize: 25,
+    padding: 4,
+    paddingBottom: 15,
+    marginBottom: 10,
+  },
+  searchBar: {
+    borderWidth: 1,
+    padding: 10,
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 20,
+    paddingLeft: 0,
+    color: '#000000',
+  },
+  wrapper: {
+    margin: 20,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 0,
+  },
+  searchBtn: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+  },
+  headerBlocks: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    marginBottom: 30,
+    marginTop: 30,
+    maringLeft: 10,
+    marginRight: 10,
+  },
+  map: {
+    width: 340,
+    height: 200,
+    borderRadius: 6,
+  },
+  wrapperBlock: {
+    margin: 24,
+    marginTop: 0,
+  },
+  flatDescription: {
+    borderWidth: 0.5,
+    borderRadius: 10,
+    width: 160,
+    height: 133,
+    margin: 6,
+    position: 'relative',
+  },
+  mock: {
+    borderRadius: 6,
+    width: 160,
+    height: 133,
+    backgroundColor: 'gray',
+  },
+  flatWrapper: {
+    display: 'flex',
+    alignContent: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  moreInfoFlats: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  plashka: {
+    position: 'absolute',
+    zIndex: 100,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'red',
+  },
+});
