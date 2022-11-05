@@ -11,6 +11,7 @@ import { mainStyle } from '../../styles';
 import { useFonts } from 'expo-font';
 import React from 'react';
 import { Searchbar } from 'react-native-paper';
+import FlatHolder from '../../components/flatHolder';
 const MainPage = ({ navigation }) => {
   const [searchInput, setSearchInput] = React.useState('');
   const [fontsLoaded] = useFonts({
@@ -78,25 +79,7 @@ const MainPage = ({ navigation }) => {
           <ScrollView horizontal={true}>
             <View style={mainStyle.flatWrapper}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
-                <View style={mainStyle.flatDescription} key={item}>
-                  <View style={mainStyle.mock}></View>
-                  <View
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      right: 0,
-                      bottom: 1,
-                      alignItems: 'flex-start',
-                      justifyContent: 'center',
-                      backgroundColor: 'white',
-                      borderRadius: 6,
-                      padding: 10,
-                    }}
-                  >
-                    <Text style={{ fontWeight: 'bold' }}>address</Text>
-                    <Text style={{ color: 'gray' }}>Подробнее</Text>
-                  </View>
-                </View>
+                <FlatHolder navigation={navigation} />
               ))}
             </View>
           </ScrollView>
@@ -114,25 +97,7 @@ const MainPage = ({ navigation }) => {
           <ScrollView horizontal={true}>
             <View style={mainStyle.flatWrapper}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
-                <View style={mainStyle.flatDescription} key={item}>
-                  <View style={mainStyle.mock}></View>
-                  <View
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      right: 0,
-                      bottom: 1,
-                      alignItems: 'flex-start',
-                      justifyContent: 'center',
-                      backgroundColor: 'white',
-                      borderRadius: 6,
-                      padding: 10,
-                    }}
-                  >
-                    <Text style={{ fontWeight: 'bold' }}>Чиланзар 4/3/9</Text>
-                    <Text style={{ color: 'gray' }}>Подробнее</Text>
-                  </View>
-                </View>
+                <FlatHolder navigation={navigation} />
               ))}
             </View>
           </ScrollView>

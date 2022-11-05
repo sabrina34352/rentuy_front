@@ -4,6 +4,7 @@ import SavedPosts from './pages/SavedPosts/index.js';
 import Profile from './pages/Profile/index.js';
 import RecentFlats from './components/RecentFlats/index.js';
 import Reccomended from './components/Reccomended/index.js';
+import FlatDesc from './components/FlatDesc/index.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Pfp from './assets/Pfp.js';
@@ -19,6 +20,7 @@ function MainPageRoutes() {
       <Stack.Screen name='Главная' component={MainPage} />
       <Stack.Screen name='Рекомендации' component={Reccomended} />
       <Stack.Screen name='Недавние' component={RecentFlats} />
+      <Stack.Screen name='Квартира1' component={FlatDesc} />
     </Stack.Navigator>
   );
 }
@@ -26,7 +28,19 @@ function MainPageRoutes() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.58,
+          shadowRadius: 16.0,
+
+          elevation: 24,
+        }}
+      >
         <Tab.Screen
           options={{
             tabBarIcon: () => <HomeSvg name='mainPage' />,
@@ -56,14 +70,6 @@ export default function App() {
             tabBarIcon: () => <Pfp name='provilePage' />,
           }}
         />
-        {/* <Tab.Screen
-          options={{
-            headerShown: false,
-            unmountOnBlur: true,
-          }}
-          name='RecentSearch'
-          component={RecentFlats}
-        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
