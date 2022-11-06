@@ -1,24 +1,28 @@
-import { Text, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
+import {
+  Text,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+} from 'react-native';
 import { mainStyle } from '../../styles';
 import { useFonts } from 'expo-font';
 import React from 'react';
 import { Searchbar } from 'react-native-paper';
 import FlatHolder from '../flatHolder';
+import FiltersSvg from '../../assets/Filters.js';
+import FilterComp from '../FilterComp';
+
 const RecentFlats = ({ navigation }) => {
+  const [clicked, setClicked] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState('');
-  const [fontsLoaded] = useFonts({
-    'SF-Pro':
-      'https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap',
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
 
   const onChangeText = (text) => {
     setSearchInput(text);
   };
   return (
-    <SafeAreaView style={{ fontFamily: 'SF-Pro', backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View
           style={{
@@ -38,13 +42,19 @@ const RecentFlats = ({ navigation }) => {
             <Text style={{ fontSize: 16, fontWeight: '600' }}>
               Показано unknown результатов
             </Text>
+            <Pressable onPress={() => setClicked(!clicked)}>
+              <FiltersSvg />
+            </Pressable>
           </View>
           <View style={mainStyle.moreInfoFlats}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-              <FlatHolder navigation={navigation} />
+              <View key={item}>
+                <FlatHolder navigation={navigation} />
+              </View>
             ))}
           </View>
         </View>
+        {clicked && <FilterComp handlePress={() => setClicked(!clicked)} />}
       </ScrollView>
     </SafeAreaView>
   );

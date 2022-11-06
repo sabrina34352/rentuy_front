@@ -1,15 +1,14 @@
 import React from 'react';
 import { mainStyle } from '../../styles';
 import { Text, View } from 'react-native';
-import { Pressable } from 'react-native';
-const ButtonMain = ({ text, onPress }) => {
+const Zayavka = () => {
   return (
-    <Pressable style={mainStyle.btn} onPress={onPress}>
+    <View style={mainStyle.plashka}>
       <Text style={{ color: 'white', fontWeight: '600', marginTop: 2 }}>
-        {text}
+        $400
       </Text>
-    </Pressable>
+    </View>
   );
 };
 
-export default ButtonMain;
+export default Zayavka;

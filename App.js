@@ -11,13 +11,24 @@ import Pfp from './assets/Pfp.js';
 import HomeSvg from './assets/Home.js';
 import RequestsSvg from './assets/Requests.js';
 import LikedSvg from './assets/Liked.js';
+import PfpPicture from './components/Pfp/index.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 function MainPageRoutes() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Главная' component={MainPage} />
+    <Stack.Navigator
+      screenOptions={{
+        headerRight: () => <PfpPicture />,
+      }}
+    >
+      <Stack.Screen
+        name='Главная'
+        options={{
+          headerTitle: 'Привет Сабрина!',
+        }}
+        component={MainPage}
+      />
       <Stack.Screen name='Рекомендации' component={Reccomended} />
       <Stack.Screen name='Недавние' component={RecentFlats} />
       <Stack.Screen name='Квартира1' component={FlatDesc} />

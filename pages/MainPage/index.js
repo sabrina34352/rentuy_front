@@ -12,16 +12,32 @@ import { useFonts } from 'expo-font';
 import React from 'react';
 import { Searchbar } from 'react-native-paper';
 import FlatHolder from '../../components/flatHolder';
+import axios from 'axios';
 const MainPage = ({ navigation }) => {
+  const [data, setData] = React.useState([]);
+  const response = async () => {
+    const config = {
+      proxy: {
+        protocol: 'https',
+        host: '127.0.0.1',
+        port: 9000,
+        auth: {
+          username: 'mikeymike',
+          password: 'rapunz3l',
+        },
+      },
+    };
+    await axios
+      .get('http://127.0.0.1:8000/property/list', config)
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err, 'this is shit'));
+  };
+  React.useEffect(() => {
+    response();
+    console.log(data);
+  }, []);
   const [searchInput, setSearchInput] = React.useState('');
-  const [fontsLoaded] = useFonts({
-    'SF-Pro':
-      'https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap',
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
+  // console.log(data);
   const onChangeText = (text) => {
     setSearchInput(text);
   };
@@ -40,7 +56,6 @@ const MainPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ fontFamily: 'SF-Pro', backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={mainStyle.header}>Привет, Сабрина!</Text>
         <View
           style={{
             borderBottomColor: 'black',
@@ -79,7 +94,9 @@ const MainPage = ({ navigation }) => {
           <ScrollView horizontal={true}>
             <View style={mainStyle.flatWrapper}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
-                <FlatHolder navigation={navigation} />
+                <View key={item}>
+                  <FlatHolder navigation={navigation} />
+                </View>
               ))}
             </View>
           </ScrollView>
@@ -97,7 +114,9 @@ const MainPage = ({ navigation }) => {
           <ScrollView horizontal={true}>
             <View style={mainStyle.flatWrapper}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
-                <FlatHolder navigation={navigation} />
+                <View key={item}>
+                  <FlatHolder navigation={navigation} />
+                </View>
               ))}
             </View>
           </ScrollView>

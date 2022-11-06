@@ -8,6 +8,7 @@ export const mainStyle = StyleSheet.create({
     padding: 4,
     paddingBottom: 15,
     marginBottom: 10,
+    marginTop: 10,
   },
   searchBar: {
     borderWidth: 1,
