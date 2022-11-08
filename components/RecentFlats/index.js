@@ -1,4 +1,11 @@
-import { Text, SafeAreaView, View, StyleSheet, ScrollView, Pressable } from 'react-native';
+import {
+  Text,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+} from 'react-native';
 import { mainStyle } from '../../styles';
 import { useFonts } from 'expo-font';
 import React from 'react';
@@ -9,19 +16,12 @@ import FilterComp from '../FilterComp';
 const RecentFlats = ({ navigation }) => {
   const [clicked, setClicked] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState('');
-  const [fontsLoaded] = useFonts({
-    'SF-Pro':
-      'https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap',
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
 
   const onChangeText = (text) => {
     setSearchInput(text);
   };
   return (
-    <SafeAreaView style={{ fontFamily: 'SF-Pro', backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View
           style={{

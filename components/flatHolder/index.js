@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, Image } from 'react-native';
 import { mainStyle } from '../../styles';
 import Badge from '../Badge';
 const FlatHolder = ({ navigation }) => {
@@ -8,7 +8,10 @@ const FlatHolder = ({ navigation }) => {
   };
   return (
     <View style={mainStyle.flatDescription}>
-      <View style={mainStyle.mock}></View>
+      <Image
+        style={{ width: 160, height: 133, zIndex: -1, position: 'relative' }}
+        source={require('../../assets/mockHouse.png')}
+      />
       <Badge />
       <View
         style={{
@@ -24,7 +27,7 @@ const FlatHolder = ({ navigation }) => {
           padding: 5,
         }}
       >
-        <Text style={{ fontWeight: 'bold' }}>address</Text>
+        <Text style={{ fontWeight: 'bold' }}>Мирзо Улугбек 4/5/6</Text>
         <Pressable onPress={handlePress}>
           <Text style={{ color: 'gray' }}>Подробнее</Text>
         </Pressable>

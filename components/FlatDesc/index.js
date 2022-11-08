@@ -9,6 +9,7 @@ import {
   TextInput,
   Animated,
   Button,
+  Pressable,
 } from 'react-native';
 import Badge from '../Badge';
 import ChatSvg from '../../assets/Chat.js';
@@ -16,6 +17,7 @@ import Tag from '../Tag';
 import ButtonMain from '../ButtonMain';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import Tick from '../../assets/Tick';
+import DatePicker from '@react-native-community/datetimepicker';
 
 const OneComment = ({ name, date, description }) => {
   return (
@@ -40,6 +42,8 @@ const OneComment = ({ name, date, description }) => {
 const FlatDesc = () => {
   const scrollRef = useRef();
   const [status, setStatus] = React.useState({});
+  const [showFirst, setShowFirst] = React.useState(false);
+  const [showSecond, setShowSecond] = React.useState(false);
   const video = React.useRef(null);
   const [clicked, setClicked] = React.useState(false);
   const handlePress = () => {
@@ -49,8 +53,11 @@ const FlatDesc = () => {
       animated: true,
     });
   };
+  const [date, setDate] = React.useState('09-10-2020');
+  const [date2, setDate2] = React.useState('09-10-2020');
+  console.log(date);
   return (
-    <SafeAreaView style={{ fontFamily: 'SF-Pro', backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} ref={scrollRef}>
         <View style={{ position: 'relative' }}>
           <View style={mainStyle.wrapperBadge}>
@@ -75,9 +82,7 @@ const FlatDesc = () => {
             <Video
               ref={video}
               style={{ alignSelf: 'center', width: 400, height: 300 }}
-              source={{
-                uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-              }}
+              source={require('../../assets/houseTour.mp4')}
               useNativeControls
               resizeMode='contain'
               isLooping
@@ -175,7 +180,7 @@ const FlatDesc = () => {
               </Text>
               <View style={{ marginTop: 15 }}>
                 <Text style={mainStyle.extraText}>Заезд</Text>
-                <TextInput
+                {/* <TextInput
                   placeholder='Ноябрь 2022'
                   style={{
                     marginVertical: 10,
@@ -184,20 +189,63 @@ const FlatDesc = () => {
                     borderRadius: 4,
                     paddingLeft: 10,
                   }}
-                />
+                /> */}
+                <Pressable onPress={() => setShowFirst(true)}>
+                  <TextInput placeholder={date} value={date} editable={false} />
+                </Pressable>
+                {showFirst && (
+                  <DatePicker
+                    // style={styles.datePickerStyle}
+                    value={new Date()}
+                    mode='date'
+                    customStyles={{
+                      dateIcon: {
+                        //display: 'none',
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0,
+                      },
+                      dateInput: {
+                        marginLeft: 36,
+                      },
+                    }}
+                    onChange={(eve, date) => {
+                      // setShowFirst(false);
+                      console.log(date);
+                      setDate(date.toString().slice(0, 10));
+                    }}
+                  />
+                )}
               </View>
               <View style={{ marginVertical: 15 }}>
                 <Text style={mainStyle.extraText}>Выезд</Text>
-                <TextInput
-                  placeholder='Февраль 2023'
-                  style={{
-                    marginVertical: 10,
-                    borderWidth: 0.2,
-                    height: 36,
-                    borderRadius: 4,
-                    paddingLeft: 10,
-                  }}
-                />
+                <Pressable onPress={() => setShowSecond(true)}>
+                  <TextInput placeholder={date2} editable={false} />
+                </Pressable>
+                {showSecond && (
+                  <DatePicker
+                    // style={styles.datePickerStyle}
+                    value={new Date()}
+                    mode='date' // The enum of date, datetime and time
+                    customStyles={{
+                      dateIcon: {
+                        //display: 'none',
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0,
+                      },
+                      dateInput: {
+                        marginLeft: 36,
+                      },
+                    }}
+                    onChange={(event, date) => {
+                      // setShowSecond(false);
+                      setDate2(date.toString().slice(0, 10));
+                    }}
+                  />
+                )}
               </View>
               <View>
                 <Text style={{ fontSize: 16, fontWeight: '600' }}>

@@ -13,6 +13,7 @@ import RequestsSvg from './assets/Requests.js';
 import LikedSvg from './assets/Liked.js';
 import PfpPicture from './components/Pfp/index.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SecondFlatDesc from './components/FlatDesc/flat2.js';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 function MainPageRoutes() {
@@ -32,6 +33,7 @@ function MainPageRoutes() {
       <Stack.Screen name='Рекомендации' component={Reccomended} />
       <Stack.Screen name='Недавние' component={RecentFlats} />
       <Stack.Screen name='Квартира1' component={FlatDesc} />
+      <Stack.Screen name='Квартира2' component={SecondFlatDesc} />
     </Stack.Navigator>
   );
 }

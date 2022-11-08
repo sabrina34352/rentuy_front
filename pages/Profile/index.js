@@ -73,10 +73,65 @@ const Profile = ({ navigation }) => {
               Чат с владельцем квартиры
             </Text>
           </View>
-          <View style={{display:'flex',}}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignContent: 'center',
+            }}
+          >
             <PfpPicture />
-            <Text style={{ fontSize: 16, fontWeight: '600' }}>
-              Сабрина Бабакулова
+            <View style={{ marginLeft: 20 }}>
+              <Text style={{ fontSize: 16, fontWeight: '600' }}>
+                Сабрина Бабакулова
+              </Text>
+              <Text style={mainStyle.extraText}>+998949452411</Text>
+            </View>
+          </View>
+          <View>
+            <Text
+              style={{
+                borderBottomWidth: 0.2,
+                borderColor: 'gray',
+                paddingBottom: 20,
+                paddingTop: 20,
+              }}
+            >
+              Личная информация
+            </Text>
+            <Text
+              style={{
+                borderBottomWidth: 0.2,
+                borderColor: 'gray',
+                paddingBottom: 20,
+                paddingTop: 20,
+              }}
+            >
+              Статус регистрации
+            </Text>
+            <View
+              style={{
+                borderBottomWidth: 0.2,
+                borderColor: 'gray',
+                paddingBottom: 20,
+                paddingTop: 20,
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text>Смена пароля</Text>
+              <Text>{'>'}</Text>
+            </View>
+            <Text
+              style={{
+                borderBottomWidth: 0.2,
+                borderColor: 'gray',
+                paddingBottom: 20,
+                paddingTop: 20,
+              }}
+            >
+              Уведомления
             </Text>
           </View>
         </View>
