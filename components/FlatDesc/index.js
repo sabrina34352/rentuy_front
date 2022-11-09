@@ -18,6 +18,7 @@ import ButtonMain from '../ButtonMain';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import Tick from '../../assets/Tick';
 import DatePicker from '@react-native-community/datetimepicker';
+import { useRoute } from '@react-navigation/native';
 
 const OneComment = ({ name, date, description }) => {
   return (
@@ -40,6 +41,15 @@ const OneComment = ({ name, date, description }) => {
   );
 };
 const FlatDesc = () => {
+  const route = useRoute();
+  const [data, setData] = React.useState([]);
+  React.useEffect(() => {
+    fetch(
+      `https://6449-82-215-94-53.eu.ngrok.io/property/details/${route.params.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
   const scrollRef = useRef();
   const [status, setStatus] = React.useState({});
   const [showFirst, setShowFirst] = React.useState(false);
@@ -55,7 +65,10 @@ const FlatDesc = () => {
   };
   const [date, setDate] = React.useState('09-10-2020');
   const [date2, setDate2] = React.useState('09-10-2020');
-  console.log(date);
+  if (!data) {
+    return <Text>Loading...</Text>;
+  }
+  console.log(data);
   return (
     <SafeAreaView style={{ backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} ref={scrollRef}>
@@ -64,21 +77,22 @@ const FlatDesc = () => {
             <Badge />
           </View>
           <ScrollView horizontal={true}>
-            {[1, 2].map((item) => (
-              <View
-                key={item}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  marginHorizontal: 6,
-                }}
-              >
-                <Image
-                  style={{ borderRadius: 4 }}
-                  source={require('../../assets/mockHouse.png')}
-                />
-              </View>
-            ))}
+            {data &&
+              data.images.map((item, index) => (
+                <View
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginHorizontal: 6,
+                  }}
+                >
+                  <Image
+                    style={{ borderRadius: 4 }}
+                    source={{ uri: `${item.image}` }}
+                  />
+                </View>
+              ))}
             <Video
               ref={video}
               style={{ alignSelf: 'center', width: 400, height: 300 }}
@@ -94,7 +108,7 @@ const FlatDesc = () => {
             <View style={mainStyle.nameHolder}>
               <View style={mainStyle.nameWrapper}>
                 <Text style={{ fontWeight: '600' }}>
-                  Мамасаидов Мухаммадсаид
+                  {/* {data.owner.first_name} {data.owner.last_name} */}
                 </Text>
                 <Text style={mainStyle.extraText}>Владелец квартиры</Text>
               </View>
@@ -180,20 +194,11 @@ const FlatDesc = () => {
               </Text>
               <View style={{ marginTop: 15 }}>
                 <Text style={mainStyle.extraText}>Заезд</Text>
-                {/* <TextInput
-                  placeholder='Ноябрь 2022'
-                  style={{
-                    marginVertical: 10,
-                    borderWidth: 0.2,
-                    height: 36,
-                    borderRadius: 4,
-                    paddingLeft: 10,
-                  }}
-                /> */}
+
                 <Pressable onPress={() => setShowFirst(true)}>
                   <TextInput placeholder={date} value={date} editable={false} />
                 </Pressable>
-                {showFirst && (
+                {/* {showFirst && (
                   <DatePicker
                     // style={styles.datePickerStyle}
                     value={new Date()}
@@ -216,14 +221,14 @@ const FlatDesc = () => {
                       setDate(date.toString().slice(0, 10));
                     }}
                   />
-                )}
+                )} */}
               </View>
               <View style={{ marginVertical: 15 }}>
                 <Text style={mainStyle.extraText}>Выезд</Text>
                 <Pressable onPress={() => setShowSecond(true)}>
                   <TextInput placeholder={date2} editable={false} />
                 </Pressable>
-                {showSecond && (
+                {/* {showSecond && (
                   <DatePicker
                     // style={styles.datePickerStyle}
                     value={new Date()}
@@ -245,7 +250,7 @@ const FlatDesc = () => {
                       setDate2(date.toString().slice(0, 10));
                     }}
                   />
-                )}
+                )} */}
               </View>
               <View>
                 <Text style={{ fontSize: 16, fontWeight: '600' }}>

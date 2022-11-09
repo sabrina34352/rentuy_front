@@ -15,8 +15,13 @@ import FiltersSvg from '../../assets/Filters.js';
 import FilterComp from '../FilterComp';
 const RecentFlats = ({ navigation }) => {
   const [clicked, setClicked] = React.useState(false);
+  const [data, setData] = React.useState([]);
   const [searchInput, setSearchInput] = React.useState('');
-
+  React.useEffect(() => {
+    fetch('https://6449-82-215-94-53.eu.ngrok.io/property/list')
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
   const onChangeText = (text) => {
     setSearchInput(text);
   };
@@ -39,16 +44,16 @@ const RecentFlats = ({ navigation }) => {
         <View style={mainStyle.wrapperBlock}>
           <View style={mainStyle.headerBlocks}>
             <Text style={{ fontSize: 16, fontWeight: '600' }}>
-              Показано unknown результатов
+              Показано {data.length} результатов
             </Text>
             <Pressable onPress={() => setClicked(!clicked)}>
               <FiltersSvg />
             </Pressable>
           </View>
           <View style={mainStyle.moreInfoFlats}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-              <View key={item}>
-                <FlatHolder navigation={navigation} />
+            {data.map((item) => (
+              <View key={item.id}>
+                <FlatHolder navigation={navigation} data={item} />
               </View>
             ))}
           </View>
